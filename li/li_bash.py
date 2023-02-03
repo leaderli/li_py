@@ -3,9 +3,8 @@ import subprocess
 from subprocess import Popen, PIPE
 
 
-def run(command:str):
+def run(command: str) -> None:
     """
-
     :param command:  shell statement
     :return:
     """
@@ -13,7 +12,7 @@ def run(command:str):
     subprocess.run(command, shell=True, universal_newlines=True)
 
 
-def call(command):
+def call(command: str) -> str:
     logging.debug(command)
     with Popen(command, shell=True, stdout=PIPE, stderr=PIPE, universal_newlines=True) as fd:
         out, err = fd.communicate()
