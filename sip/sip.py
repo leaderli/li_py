@@ -231,12 +231,9 @@ def main():
 
     args = sys.argv[1:]
     # -d 直接进入debug模式
-    print(args)
-    opt = single_short_opts_exits(args, 'd')
     if single_short_opts_exits(args, 'd'):
         sip.do_debug('')
         args.remove('d')
-    print(args)
 
     command = ' '.join(args)
     if command:
