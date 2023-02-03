@@ -8,13 +8,11 @@ class LiUtilTestCase(unittest.TestCase):
         # noinspection PyTypeChecker
         self.assertIsNone(li_util.dict_deep_get(None, None))
         self.assertIsNone(li_util.dict_deep_get({}, ["hello", "world"]))
-        self.assertEqual("1", li_util.dict_deep_get(
-            {
-                "hello": {
-                    "world": "1"
-                }
-            }, ["hello", "world"])
-                         )
+        self.assertEqual("1", li_util.dict_deep_get({
+            "hello": {
+                "world": "1"
+            }
+        }, ["hello", "world"]))
 
 
 if __name__ == '__main__':

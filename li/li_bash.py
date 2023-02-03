@@ -3,7 +3,12 @@ import subprocess
 from subprocess import Popen, PIPE
 
 
-def run(command):
+def run(command:str):
+    """
+
+    :param command:  shell statement
+    :return:
+    """
     logging.debug(command)
     subprocess.run(command, shell=True, universal_newlines=True)
 
@@ -20,5 +25,7 @@ def call(command):
 
 def ssh_call(address, work_dir, command):
     return call(
-        """ssh -q {address}  'cd {work_dir} && {command}'""".format(address=address, work_dir=work_dir,
-                                                                    command=command))
+        """
+        ssh -q {address}  'cd {work_dir} && {command}'
+        """.format(address=address, work_dir=work_dir, command=command)
+    )

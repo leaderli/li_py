@@ -155,7 +155,7 @@ class Sip(LiCmd):
     @run_on_uat
     def do_push(self, argv):
         """
-        上传最新脚本,实际使用 git 进线推送。 参数作为 commit 的 信息，默认使用当前时间。
+        上传最新脚本,实际使用 git 进行推送。 参数作为 commit 的 信息，默认使用当前时间。
 
         """
 
