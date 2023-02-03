@@ -167,19 +167,11 @@ class Sip(LiCmd):
         status = call('git status -s')
 
         if status:
-            import platform
-
-            if platform.system() == 'Windows':
-                run('git add .')
-                run('git commit -m "{}"'.format(msg))
-                run('git push')
-            else:
-                cmd = '''
-                        git add .  &&
-                        git commit -m "{}"  &&
-                        git push
-                      '''.format(msg)
-                run(cmd)
+            run('git add .')
+            run('git commit -m "{}"'.format(msg))
+            run('git push')
+        else:
+            print("noting changed")
 
     def complete_backup(self, text, line, begin_idx, end_idx):
 
