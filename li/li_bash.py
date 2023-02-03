@@ -18,6 +18,7 @@ def call(command):
         return out.strip()
 
 
-def ssh_call(address, workdir, command):
+def ssh_call(address, work_dir, command):
     return call(
-        """ssh -q {address}  'cd {dir} && {command}'""".format(address=address, workdir=workdir, command=command))
+        """ssh -q {address}  'cd {work_dir} && {command}'""".format(address=address, work_dir=work_dir,
+                                                                    command=command))

@@ -11,7 +11,7 @@ from li.li_bash import call, run
 from li.li_cmd import LiCmd
 from li.li_decorator import run_on_uat
 from li.li_getopt import single_short_opts_exits
-from li.li_util import deep_get
+from li.li_util import dict_deep_get
 
 SIP_CONFIG_FILES = 'SIP_CONFIG_FILES'
 SIP_ENV = 'sip_env'
@@ -50,13 +50,13 @@ class Sip(LiCmd):
             with open(config_file) as f:
                 self.__config.update(yaml.load(f.read(), Loader=yaml.Loader))
 
-        super().__log__(li_log.get_logger('sip', deep_get(self.__config, ['sip', 'log']) or 'sip.log'))
+        super().__log__(li_log.get_logger('sip', dict_deep_get(self.__config, ['sip', 'log']) or 'sip.log'))
         pass
 
     def do_backup(self, argv):
         """ 备份war包，默认备份为zip包，zip包以当天时间戳加上自增编号"""
-        backup_origin = deep_get(self.__config, ['backup', 'origin'])
-        backup_target = deep_get(self.__config, ['backup', 'target'])
+        backup_origin = dict_deep_get(self.__config, ['backup', 'origin'])
+        backup_target = dict_deep_get(self.__config, ['backup', 'target'])
         li_assert.is_exist_dir(backup_origin)
         li_assert.is_exist_dir(backup_target)
         apps = argv.split()
@@ -82,7 +82,7 @@ class Sip(LiCmd):
 
         argv = argv.split()
         d = self.__config
-        d = deep_get(d, argv)
+        d = dict_deep_get(d, argv)
         print(yaml.dump(d))
 
     def do_debug(self, argv):
@@ -120,7 +120,7 @@ class Sip(LiCmd):
 
     def do_history(self, argv):
         """ 查看命令历史，命令被记录为日志的形式，实际上是调用 vi 查看日志"""
-        log = deep_get(self.__config, ['sip', 'log']) or 'sip.log'
+        log = dict_deep_get(self.__config, ['sip', 'log']) or 'sip.log'
 
         run('vi {}'.format(log))
 
@@ -187,7 +187,7 @@ class Sip(LiCmd):
         if '-a' in input_apps:
             return None
 
-        backup_origin = deep_get(self.__config, ['backup', 'origin'])
+        backup_origin = dict_deep_get(self.__config, ['backup', 'origin'])
         origin_apps = list(map(lambda war: war.replace('.war', ''),
                                [war for war in os.listdir(backup_origin) if war.endswith('.war')]))
 
@@ -203,13 +203,11 @@ class Sip(LiCmd):
         # 当最后一位为待补全时，剔除
         if text:
             keys.pop()
-        # 去掉 config
-        keys.reverse()
 
         d = self.__config
         #
 
-        d = deep_get(d, keys, reverse=False)
+        d = dict_deep_get(d, keys)
         # while keys:
         #     key = keys.pop()
         #     d = d.get(key, {})
@@ -241,10 +239,12 @@ def main():
 
     args = sys.argv[1:]
     # -d 直接进入debug模式
+    print(args)
     opt = single_short_opts_exits(args, 'd')
     if single_short_opts_exits(args, 'd'):
         sip.do_debug('')
-        args.remove(opt)
+        args.remove('d')
+    print(args)
 
     command = ' '.join(args)
     if command:

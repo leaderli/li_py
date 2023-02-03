@@ -1,9 +1,7 @@
-def deep_get(d, keys, reverse=True):
-    if reverse:
-        keys.reverse()
+from functools import reduce
 
-    while keys:
-        key = keys.pop()
-        d = d.get(key, {})
 
-    return d
+def dict_deep_get(_dict: dict, keys: list):
+    if keys is None:
+        return None
+    return reduce(lambda d, key: d.get(key) if d else None, keys, _dict)
