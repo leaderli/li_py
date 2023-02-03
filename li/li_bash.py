@@ -13,6 +13,10 @@ def run(command: str) -> None:
 
 
 def call(command: str) -> str:
+    """
+    :param command:  shell statement
+    :return the result of execute the shell statement
+    """
     logging.debug(command)
     with Popen(command, shell=True, stdout=PIPE, stderr=PIPE, universal_newlines=True) as fd:
         out, err = fd.communicate()
@@ -22,7 +26,14 @@ def call(command: str) -> str:
         return out.strip()
 
 
-def ssh_call(address, work_dir, command):
+def ssh_call(address: str, work_dir: str, command: str) -> str:
+    """
+
+    :param address: the remote server ip
+    :param work_dir:  the remote server dir
+    :param command:  the shell statement
+    :return the result of execute the shell statement
+    """
     return call(
         """
         ssh -q {address}  'cd {work_dir} && {command}'
