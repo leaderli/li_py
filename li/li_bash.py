@@ -9,7 +9,7 @@ def run(command: str) -> None:
     :return:
     """
     logging.debug(command)
-    subprocess.run(command, shell=True, universal_newlines=True)
+    subprocess.call(command, shell=True, universal_newlines=True)
 
 
 def call(command: str) -> str:
