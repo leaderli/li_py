@@ -140,7 +140,7 @@ class Sip(LiCmd):
         """
 
         run('git fetch --all')
-        status = call('git diff origin/HEAD --stat')
+        status = call('git diff origin/master--stat')
 
         if not status:
             print('no change from origin')
@@ -148,8 +148,7 @@ class Sip(LiCmd):
         if single_short_opts_exits(argv, 'b'):
             sha = call('git rev-parse --short HEAD')
             run('cd .. && zip -r {name}.{sha}.zip {name}'.format(name='python-tips', sha=sha))
-        run('git reset --hard HEAD')
-        run('git pull')
+        run('git reset --hard master')
         exit()
 
     @run_on_uat
