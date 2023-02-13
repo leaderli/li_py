@@ -1026,17 +1026,17 @@ class Scanner:
                 else:
                     chunks.append(line_break)
 
-                # This is Clark Evans's interpretation (also in the spec
-                # examples):
-                #
-                # if folded and line_break == '\n':
-                #    if not breaks:
-                #        if self.peek() not in ' \t':
-                #            chunks.append(' ')
-                #        else:
-                #            chunks.append(line_break)
-                # else:
-                #    chunks.append(line_break)
+            # This is Clark Evans's interpretation (also in the spec
+            # examples):
+            #
+            # if folded and line_break == '\n':
+            #    if not breaks:
+            #        if self.peek() not in ' \t':
+            #            chunks.append(' ')
+            #        else:
+            #            chunks.append(line_break)
+            # else:
+            #    chunks.append(line_break)
             else:
                 break
 

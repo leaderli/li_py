@@ -28,7 +28,6 @@ def call(command: str) -> str:
 
 def ssh_call(address: str, work_dir: str, command: str) -> str:
     """
-
     :param address: the remote server ip
     :param work_dir:  the remote server dir
     :param command:  the shell statement
@@ -37,5 +36,6 @@ def ssh_call(address: str, work_dir: str, command: str) -> str:
     return call(
         """
         ssh -q {address}  'cd {work_dir} && {command}'
-        """.format(address=address, work_dir=work_dir, command=command)
+        """
+            .format(address=address, work_dir=work_dir, command=command)
     )
