@@ -140,7 +140,7 @@ class Sip(LiCmd):
         """
 
         run('git fetch --all')
-        status = call('git diff origin/master--stat')
+        status = call('git diff origin/master --stat')
 
         if not status:
             print('no change from origin')
