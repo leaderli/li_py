@@ -232,7 +232,7 @@ def main():
     # -d 直接进入debug模式
     if single_short_opts_exits(args, 'd'):
         sip.do_debug('')
-        args.remove('d')
+        args.remove('-d')
 
     command = ' '.join(args)
     if command:
