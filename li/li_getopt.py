@@ -6,10 +6,12 @@ def single_short_opts_exits(args, short):
 
     if type(args) == str:
         args = args.split()
-    opts = getopt.getopt(args, short, [])[0]
-
-    if opts:
-        return opts[0][0]
+    try:
+        opts = getopt.getopt(args, short, [])[0]
+        if opts:
+            return opts[0][0]
+    except Exception as err:
+        print("---------->", err)
 
     return None
 

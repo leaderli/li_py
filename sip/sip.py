@@ -1,3 +1,4 @@
+import getopt
 import logging
 import os
 import re
@@ -229,10 +230,16 @@ def main():
     sip.prompt = '> '
 
     args = sys.argv[1:]
+
     # -d 直接进入debug模式
-    if single_short_opts_exits(args, 'd'):
-        sip.do_debug('')
-        args.remove('-d')
+    shortopts = 'd'
+    try:
+        opts = getopt.getopt(args, shortopts, [])[0]
+        if opts:
+            sip.do_debug('')
+            args.remove('-d')
+    except Exception as err:
+        print("---------->", err)
 
     command = ' '.join(args)
     if command:
